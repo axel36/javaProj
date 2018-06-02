@@ -6,20 +6,13 @@ public class Connection {
 
     private long gameId;
 
-    private boolean available = true;
+    private boolean creatingGame = false;
 
+    private int rating;
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public Connection(String name) {
+    public Connection(String name, int rating) {
         this.name = name;
+        this.rating = rating;
     }
 
     public String getName() {
@@ -33,5 +26,21 @@ public class Connection {
     public Connection setGameId(long gameId) {
         this.gameId = gameId;
         return this;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void changeRating(int rating) {
+        this.rating += rating;
+    }
+
+    public boolean isCreatingGame() {
+        return creatingGame;
+    }
+
+    public void setCreatingGame(boolean creatingGame) {
+        this.creatingGame = creatingGame;
     }
 }

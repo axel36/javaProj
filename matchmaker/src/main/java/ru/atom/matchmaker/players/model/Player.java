@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Player implements Serializable {
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="course")
     private long id;
 
     @Column(name = "login", unique = true, nullable = false, length = 40)
@@ -83,8 +83,8 @@ public class Player implements Serializable {
         return rating;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void changeRating(int rating) {
+        this.rating += rating;
     }
 
     public Player() {
@@ -95,6 +95,9 @@ public class Player implements Serializable {
         this.login = login;
         this.password = password;
         this.rating = 1500;
+        this.idSession = -1;
+        this.inSearch = false;
+        this.isOnline = false;
     }
 
     @Override

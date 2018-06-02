@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="1804cc29-bc4b-47e7-a957-526545d4195e" name="&quot;front logReg - normal &quot;" comment="" />
-    <list default="true" id="71bfebb0-00ac-4264-a2f6-944c68524dbf" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../game_service/src/main/java/ru/atom/gameservice/message/JsonParser.java" afterPath="$PROJECT_DIR$/../game_service/src/main/java/ru/atom/gameservice/message/JsonParser.java" />
-      <change beforePath="$PROJECT_DIR$/../game_service/src/main/java/ru/atom/gameservice/tick/PowerUpType.java" afterPath="$PROJECT_DIR$/../game_service/src/main/java/ru/atom/gameservice/tick/PowerUpType.java" />
-      <change beforePath="$PROJECT_DIR$/../matchmaker/src/main/java/ru/atom/matchmaker/Matchmaker.java" afterPath="$PROJECT_DIR$/../matchmaker/src/main/java/ru/atom/matchmaker/Matchmaker.java" />
-    </list>
+    <list default="true" id="71bfebb0-00ac-4264-a2f6-944c68524dbf" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />

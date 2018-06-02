@@ -2,7 +2,7 @@ package ru.atom.gameservice.message;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +24,8 @@ public class JsonParser {
                     return new BombMessage(topic, name);
             }
             logger.info("JSON -> Message", jsonString);
-//        /*} catch (JsonGenerationException e) {
-//            logger.error("Wrong JSON");*/
+        } catch (JsonGenerationException e) {
+            logger.error("Wrong JSON");
         } catch (IOException e) {
             logger.error("Can't JSON -> Message");
             logger.error(e.getLocalizedMessage());

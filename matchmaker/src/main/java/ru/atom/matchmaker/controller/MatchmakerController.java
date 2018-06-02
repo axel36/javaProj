@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.atom.matchmaker.Connection;
 import ru.atom.matchmaker.Matchmaker;
+import ru.atom.matchmaker.players.dao.PlayerDao;
+import ru.atom.matchmaker.players.model.Player;
 
 @Controller
 @RequestMapping("matchmaker")
@@ -17,41 +19,19 @@ public class MatchmakerController {
     private static final Logger logger = LoggerFactory.getLogger(MatchmakerController.class);
 
     private Matchmaker matchmaker;
+    private final PlayerDao playerDao;
 
     @Autowired
-    public MatchmakerController(Matchmaker matchmaker) {
+    public MatchmakerController(Matchmaker matchmaker, PlayerDao playerDao) {
         this.matchmaker = matchmaker;
+        this.playerDao = playerDao;
     }
 
-    @CrossOrigin("*")
-    @RequestMapping(path = "join",
-            method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Long> join(@RequestParam("name") String name) {
-        logger.info("New connection: name = {}", name);
-        Connection playerConnection = new Connection(name);
-        matchmaker.getQueue().offer(playerConnection);
-        synchronized (playerConnection) {
-            try {
-                playerConnection.wait(10_000);
-            } catch (InterruptedException e) {
-                logger.error(e.getLocalizedMessage());
-                return ResponseEntity.badRequest().body((long) 0);
-            }
-        }
-        if ( playerConnection.isAvailable()){
-            return ResponseEntity.ok(playerConnection.getGameId());
-        }
-
-        return ResponseEntity.badRequest().body((long) 0);
-    }
-
-/*
     @CrossOrigin(origins = "*")
     @RequestMapping(path = "login",
             method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> login(@RequestParam("Login") String login, @RequestParam("password") String password) {
+    public ResponseEntity<String> login(@RequestParam("login") String login, @RequestParam("password") String password) {
         logger.info("New connection: Login = {}", login);
 
         Player player = playerDao.getByLogin(login);
@@ -63,27 +43,48 @@ public class MatchmakerController {
             return ResponseEntity.badRequest().body("Wrong password");
         }
 
-        Connection playerConnection = new Connection(login);
-        matchmaker.getQueue().offer(playerConnection);
-        synchronized (playerConnection) {
-            try {
-                playerConnection.wait(10_000);
-            } catch (InterruptedException e) {
-                logger.error(e.getLocalizedMessage());
-                return ResponseEntity.badRequest().body("0");
-            }
-        }
-        if ( playerConnection.isAvailable()){
-            return ResponseEntity.ok(String.valueOf(playerConnection.getGameId()));
+        try {
+            logger.info("login player = {}", login);
+            player.setOnline(true);
+            playerDao.update(player);
+        } catch (Exception ex) {
+            logger.error(ex.getLocalizedMessage());
+            return ResponseEntity.badRequest().body("smt is wrong in login");
         }
 
-        return ResponseEntity.badRequest().body("0");
+        return ResponseEntity.ok().body("login successful");
     }
 
+    @CrossOrigin(origins = "*")
+    @RequestMapping(path = "logout",
+            method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> logout(@RequestParam("login") String login) {
+        logger.info("Exit: Login = {}", login);
+
+        Player player = playerDao.getByLogin(login);
+
+        if (player == null){
+            return ResponseEntity.badRequest().body("Cant find this name");
+        }
+
+        try {
+            logger.info("logout player = {}", login);
+            player.setOnline(false);
+            playerDao.update(player);
+        } catch (Exception ex) {
+            logger.error(ex.getLocalizedMessage());
+            return ResponseEntity.badRequest().body("smt is wrong in logout");
+        }
+
+        return ResponseEntity.ok("logout successful");
+    }
+
+    @CrossOrigin(origins = "*")
     @RequestMapping(path = "registration",
             method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> registration(@RequestParam("Login") String login, @RequestParam("password") String password) {
+    public ResponseEntity<String> registration(@RequestParam("login") String login, @RequestParam("password") String password) {
         logger.info("New player: Login = {}", login);
 
         if (login.length() < 4) {
@@ -105,9 +106,63 @@ public class MatchmakerController {
             playerDao.save(newPlayer);
         } catch (Exception ex) {
             logger.error(ex.getLocalizedMessage());
-            return ResponseEntity.badRequest().body("smt is wrong");
+            return ResponseEntity.badRequest().body("smt is wrong in saving new player");
         }
         return ResponseEntity.ok("Create new player");
     }
-*/
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(path = "join",
+            method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> join(@RequestParam("login") String login) {
+
+        logger.info("new finder: Login = {}", login);
+
+        Player player = playerDao.getByLogin(login);
+
+        if (player == null){
+            return ResponseEntity.badRequest().body("Cant find this name");
+        }
+
+        if (!player.isOnline()) {
+            return ResponseEntity.badRequest().body("problem in join/ set online");
+        }
+
+        try {
+            logger.info("player in findPool = {}", login);
+            player.setInSearch(true);
+            playerDao.update(player);
+        } catch (Exception ex) {
+            logger.error(ex.getLocalizedMessage());
+            return ResponseEntity.badRequest().body("smt is wrong in update in join");
+        }
+
+
+        Connection playerConnection = new Connection(player.getLogin(), player.getRating());
+
+        matchmaker.getQueue().offer(playerConnection);
+
+        synchronized (playerConnection) {
+            try {
+                playerConnection.wait(10_000);
+            } catch (InterruptedException e) {
+                logger.error(e.getLocalizedMessage());
+                return ResponseEntity.badRequest().body("find game dont works");
+            }
+        }
+        if ( playerConnection.isCreatingGame()){
+            try {
+                player.setIdSession(playerConnection.getGameId());
+                playerDao.update(player);
+            } catch (Exception ex) {
+                logger.error(ex.getLocalizedMessage());
+                return ResponseEntity.badRequest().body("smt is wrong in SetIdSession");
+            }
+            return ResponseEntity.ok(String.valueOf(playerConnection.getGameId()));
+        }
+
+        return ResponseEntity.badRequest().body("matchmaker don`t working");
+    }
+
 }

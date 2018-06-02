@@ -4,7 +4,7 @@ package ru.atom.gameservice.tick;
 добавлю заготовочку
  */
 public class Fire extends GameObject implements Tickable{
-    long timeToLive = 250;
+    long timeToLive = 1500;
     public Fire(int x, int y, Field field) {
         super(x, y, field);
     }
@@ -26,9 +26,6 @@ public class Fire extends GameObject implements Tickable{
 
     @Override
     public String toJson() {
-        return String.format("{\"position\":{\"x\":%d,\"y\":%d},\"id\":%d,\"type\":\"Fire\"}",
-                x * Field.tile,
-                y * Field.tile,
-                id);
+        return "";
     }
 }

@@ -9,10 +9,11 @@ public class Player extends GameObject implements Tickable {
     private int velY;
     private int pixelX; // центр игрока
     private int pixelY; // центр игрока
+    private int bombsRadius = 1;
     private int bombsMax = 1;
     private int speed = 1;
     private int bombsPlanted = 0;
-    private int bombRadius = 1;
+    private int bombRadius;
     private Direction direction = Direction.IDLE;
 
     public Player(int x, int y, Field field, String name) {
@@ -40,39 +41,29 @@ public class Player extends GameObject implements Tickable {
             int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
             switch (direction) {
                 case UP:
-                    x1 = pixelX - Field.tile/2;
-                    x2 = pixelX + Field.tile/2;
+                    x1 = pixelX - Field.tile/4;
+                    x2 = pixelX + Field.tile/4;
                     y1 = y2 = pixelY + Field.tile;
                     break;
                 case DOWN:
-                    x1 = pixelX - Field.tile/2;
-                    x2 = pixelX + Field.tile/2;
+                    x1 = pixelX - Field.tile/4;
+                    x2 = pixelX + Field.tile/4;
                     y1 = y2 = pixelY - Field.tile;
                     break;
                 case LEFT:
                     x1 = x2 = pixelX - Field.tile;
-                    y1 = pixelY + Field.tile/2;
-                    y2 = pixelY - Field.tile/2;
+                    y1 = pixelY + Field.tile/4;
+                    y2 = pixelY - Field.tile/4;
                     break;
                 case RIGHT:
                     x1 = x2 = pixelX + Field.tile;
-                    y1 = pixelY + Field.tile/2;
-                    y2 = pixelY - Field.tile/2;
+                    y1 = pixelY + Field.tile/4;
+                    y2 = pixelY - Field.tile/4;
                     break;
 
             }
-            GameObject col1 = null;
-            GameObject col2 = null;
-
-            if (y1/Field.tile<field.width && x1/Field.tile< field.height && x1/Field.tile>=0 && y1/Field.tile>=0){
-
-                col1 = field.getAt(x1/Field.tile, y1/Field.tile);
-            }
-            if (y2/Field.tile<field.width && x2/Field.tile< field.height && x2/Field.tile>=0 && y2/Field.tile>=0){
-
-                col2 = field.getAt(x2/Field.tile, y2/Field.tile);
-            }
-            //GameObject col2 = field.getAt(x2/Field.tile, y2/Field.tile);
+            GameObject col1 = field.getAt(x1/Field.tile, y1/Field.tile);
+            GameObject col2 = field.getAt(x2/Field.tile, y2/Field.tile);
             boolean collide;
             collide= Field.checkCollision(pixelX + velX, pixelY + velY, col1)
                     || Field.checkCollision(pixelX + velX, pixelY + velY, col2);
@@ -84,22 +75,12 @@ public class Player extends GameObject implements Tickable {
                 if (col2 instanceof PowerUp) {
                     applyPowerUp((PowerUp) col2);
                 }
-
-                int tmpX =  pixelX+velX;
-                int tmpY = pixelY + velY;
-                if (tmpY<(field.width*Field.tile-3) && tmpX< (field.height*Field.tile-3) && tmpX>=3 && tmpY>=3) {
-                    pixelX += velX;
-                    pixelY += velY;
-                }
-            }
-            int tmpX =  (pixelX)/Field.tile;
-            int tmpY = (pixelY)/Field.tile;
-
-            if (tmpY<field.width && tmpX< field.height && tmpX>=0 && tmpY>=0){
-                x = (pixelX)/Field.tile;
-                y = (pixelY)/Field.tile;
+                pixelX += velX;
+                pixelY += velY;
             }
 
+            x = (pixelX)/Field.tile;
+            y = (pixelY)/Field.tile;
             field.updatePlayerPosition(this, x, y);
             velX = 0;
             velY = 0;
@@ -137,7 +118,7 @@ public class Player extends GameObject implements Tickable {
                     bombsMax++;
                     break;
                 case RANGE:
-                    bombRadius++;
+                    bombsRadius++;
             }
         }
     }

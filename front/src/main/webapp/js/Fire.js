@@ -1,8 +1,8 @@
 var Fire = function (id, position) {
     this.id = id;
     var size = {
-        w: 32,
-        h: 32
+        w: 38,
+        h: 38
     };
 
     var spriteSheet = new createjs.SpriteSheet({
