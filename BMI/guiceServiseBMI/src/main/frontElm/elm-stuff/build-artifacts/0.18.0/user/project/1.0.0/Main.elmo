@@ -1,0 +1,771 @@
+var _user$project$Main$recordEncoded = function (data) {
+	var list = {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: 'age',
+			_1: _elm_lang$core$Json_Encode$int(data.age)
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'height',
+				_1: _elm_lang$core$Json_Encode$int(data.height)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'weight',
+					_1: _elm_lang$core$Json_Encode$int(data.weight)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'gender',
+						_1: _elm_lang$core$Json_Encode$int(data.gender)
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+	return _elm_lang$core$Json_Encode$object(list);
+};
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Main$viewFormErrors = F2(
+	function (field, errors) {
+		return A2(
+			_elm_lang$html$Html$ul,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('formErrors'),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$List$map,
+				function (_p0) {
+					var _p1 = _p0;
+					return A2(
+						_elm_lang$html$Html$li,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(_p1._1),
+							_1: {ctor: '[]'}
+						});
+				},
+				A2(
+					_elm_lang$core$List$filter,
+					function (_p2) {
+						var _p3 = _p2;
+						return _elm_lang$core$Native_Utils.eq(_p3._0, field);
+					},
+					errors)));
+	});
+var _user$project$Main$radio = F2(
+	function (msg, name) {
+		return A2(
+			_elm_lang$html$Html$label,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('radio'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(msg),
+							_1: {ctor: '[]'}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(name),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Main$toTableRow = function (myListItem) {
+	return A2(
+		_elm_lang$html$Html$tr,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$td,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(myListItem.age)),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$td,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							_elm_lang$core$Basics$toString(myListItem.height)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$td,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								_elm_lang$core$Basics$toString(myListItem.weight)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$td,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(myListItem.gender),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$td,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										_elm_lang$core$Basics$toString(myListItem.index)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$td,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(myListItem.result),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$td,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(myListItem.date),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$blocStyle = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'height', _1: '3%'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'width', _1: '172px'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '5px'},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Main$Model = F5(
+	function (a, b, c, d, e) {
+		return {records: a, currentRecord: b, errors: c, bmi: d, result: e};
+	});
+var _user$project$Main$CurrentData = F4(
+	function (a, b, c, d) {
+		return {age: a, height: b, weight: c, gender: d};
+	});
+var _user$project$Main$init = {
+	ctor: '_Tuple2',
+	_0: A5(
+		_user$project$Main$Model,
+		{ctor: '[]'},
+		A4(_user$project$Main$CurrentData, 0, 0, 0, 0),
+		{ctor: '[]'},
+		0.0,
+		''),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Main$Record = F7(
+	function (a, b, c, d, e, f, g) {
+		return {age: a, height: b, weight: c, gender: d, index: e, result: f, date: g};
+	});
+var _user$project$Main$recordDecoder = A8(
+	_elm_lang$core$Json_Decode$map7,
+	_user$project$Main$Record,
+	A2(_elm_lang$core$Json_Decode$field, 'age', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'height', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'weight', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'gender', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'index', _elm_lang$core$Json_Decode$float),
+	A2(_elm_lang$core$Json_Decode$field, 'result', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
+var _user$project$Main$listOfRecordsDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$recordDecoder);
+var _user$project$Main$Male = {ctor: 'Male'};
+var _user$project$Main$Female = {ctor: 'Female'};
+var _user$project$Main$Weight = {ctor: 'Weight'};
+var _user$project$Main$Height = {ctor: 'Height'};
+var _user$project$Main$valid = function (curDat) {
+	return ((_elm_lang$core$Native_Utils.cmp(curDat.height, 0) < 1) && (_elm_lang$core$Native_Utils.cmp(curDat.weight, 0) < 1)) ? {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: _user$project$Main$Height, _1: 'must be integer, more than 0'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: _user$project$Main$Weight, _1: 'must be integer, more than 0'},
+			_1: {ctor: '[]'}
+		}
+	} : ((_elm_lang$core$Native_Utils.cmp(curDat.height, 0) < 1) ? {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: _user$project$Main$Height, _1: 'cant be < = 0'},
+		_1: {ctor: '[]'}
+	} : ((_elm_lang$core$Native_Utils.cmp(curDat.weight, 0) < 1) ? {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: _user$project$Main$Weight, _1: 'cant be < = 0'},
+		_1: {ctor: '[]'}
+	} : {ctor: '[]'}));
+};
+var _user$project$Main$Age = {ctor: 'Age'};
+var _user$project$Main$SwitchTo = function (a) {
+	return {ctor: 'SwitchTo', _0: a};
+};
+var _user$project$Main$ChangeWeight = function (a) {
+	return {ctor: 'ChangeWeight', _0: a};
+};
+var _user$project$Main$ChangeHeight = function (a) {
+	return {ctor: 'ChangeHeight', _0: a};
+};
+var _user$project$Main$ChangeAge = function (a) {
+	return {ctor: 'ChangeAge', _0: a};
+};
+var _user$project$Main$GetResponseFromBack = function (a) {
+	return {ctor: 'GetResponseFromBack', _0: a};
+};
+var _user$project$Main$getResponse = function (record) {
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$Main$GetResponseFromBack,
+		_elm_lang$http$Http$request(
+			{
+				body: _elm_lang$http$Http$jsonBody(
+					_user$project$Main$recordEncoded(record)),
+				expect: _elm_lang$http$Http$expectJson(_user$project$Main$listOfRecordsDecoder),
+				headers: {
+					ctor: '::',
+					_0: A2(_elm_lang$http$Http$header, 'Content-Type', 'application/json'),
+					_1: {ctor: '[]'}
+				},
+				method: 'POST',
+				timeout: _elm_lang$core$Maybe$Nothing,
+				url: 'http://localhost:8080/bmi',
+				withCredentials: false
+			}));
+};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p4 = msg;
+		switch (_p4.ctor) {
+			case 'ChangeAge':
+				var curRec = model.currentRecord;
+				var num = A2(
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toInt(_p4._0));
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							currentRecord: A4(_user$project$Main$CurrentData, num, curRec.height, curRec.weight, curRec.gender)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SwitchTo':
+				var _p5 = _p4._0;
+				var curRec = model.currentRecord;
+				var num = _elm_lang$core$Native_Utils.eq(_p5, _user$project$Main$Male) ? 1 : (_elm_lang$core$Native_Utils.eq(_p5, _user$project$Main$Female) ? 0 : -1);
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							currentRecord: A4(_user$project$Main$CurrentData, curRec.age, curRec.height, curRec.weight, num)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ChangeHeight':
+				var curRec = model.currentRecord;
+				var num = A2(
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toInt(_p4._0));
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							currentRecord: A4(_user$project$Main$CurrentData, curRec.age, num, curRec.weight, curRec.gender)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ChangeWeight':
+				var curRec = model.currentRecord;
+				var num = A2(
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toInt(_p4._0));
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							currentRecord: A4(_user$project$Main$CurrentData, curRec.age, curRec.height, num, curRec.gender)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SendNewRequestToBack':
+				var _p6 = _user$project$Main$valid(model.currentRecord);
+				if (_p6.ctor === '[]') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								errors: {ctor: '[]'}
+							}),
+						_1: _user$project$Main$getResponse(model.currentRecord)
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{errors: _p6}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			default:
+				if (_p4._0.ctor === 'Ok') {
+					var _p9 = _p4._0._0;
+					var bmI = _elm_lang$core$List$head(
+						_elm_lang$core$List$reverse(_p9));
+					var _p7 = bmI;
+					if (_p7.ctor === 'Just') {
+						var _p8 = _p7._0;
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{records: _p9, bmi: _p8.index, result: _p8.result}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					} else {
+						return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+					}
+				} else {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				}
+		}
+	});
+var _user$project$Main$SendNewRequestToBack = {ctor: 'SendNewRequestToBack'};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'float', _1: 'left'},
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h2,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('BMI'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _user$project$Main$blocStyle,
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('text'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$placeholder('Age'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ChangeAge),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Main$viewFormErrors, _user$project$Main$Age, model.errors),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _user$project$Main$blocStyle,
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$fieldset,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_user$project$Main$radio,
+												_user$project$Main$SwitchTo(_user$project$Main$Male),
+												'Male'),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_user$project$Main$radio,
+													_user$project$Main$SwitchTo(_user$project$Main$Female),
+													'Female'),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _user$project$Main$blocStyle,
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$input,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$type_('text'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$placeholder('Height'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ChangeHeight),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(_user$project$Main$viewFormErrors, _user$project$Main$Height, model.errors),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _user$project$Main$blocStyle,
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$input,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$type_('text'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$placeholder('Weight'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ChangeWeight),
+															_1: {ctor: '[]'}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {
+												ctor: '::',
+												_0: A2(_user$project$Main$viewFormErrors, _user$project$Main$Weight, model.errors),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _user$project$Main$blocStyle,
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$button,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SendNewRequestToBack),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('calc BmI'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'float', _1: 'left'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'margin-left', _1: '15%'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'height', _1: '15%'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h3,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Your BM index is:'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: (!_elm_lang$core$Native_Utils.eq(model.bmi, 0)) ? A2(
+								_elm_lang$html$Html$h3,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											_elm_lang$core$Basics$toString(model.bmi),
+											A2(_elm_lang$core$Basics_ops['++'], ' this is ', model.result))),
+									_1: {ctor: '[]'}
+								}) : A2(
+								_elm_lang$html$Html$h3,
+								{ctor: '[]'},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$br,
+						{ctor: '[]'},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'float', _1: 'left'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '25%'},
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$table,
+									{ctor: '[]'},
+									_elm_lang$core$List$concat(
+										{
+											ctor: '::',
+											_0: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$thead,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$th,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Age'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$th,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Height'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$th,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Weight'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$th,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Gender'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$th,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('BMI'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$th,
+																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('Result'),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$th,
+																					{ctor: '[]'},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text('Date'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											},
+											_1: {
+												ctor: '::',
+												_0: A2(_elm_lang$core$List$map, _user$project$Main$toTableRow, model.records),
+												_1: {ctor: '[]'}
+											}
+										})),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$main = _elm_lang$html$Html$program(
+	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})();
