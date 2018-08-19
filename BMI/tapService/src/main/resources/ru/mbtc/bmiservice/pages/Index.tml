@@ -1,0 +1,76 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+<head>
+    <title>here we are</title>
+</head>
+<body>
+<div style="width: 100%">
+    <div style="float: right">
+        <ul>
+            <li>
+                <t:pagelink page="Index">Main page</t:pagelink>
+            </li>
+        </ul>
+    </div>
+    <div style="float: left">
+        <h3> MBI calculator </h3>
+    </div>
+</div>
+<div style="display:inline-block;width:100%">
+    <div style="float: left; margin-right: 10%">
+        <t:form t:id="features" class="form-horizontal">
+            <table>
+                <tr>
+                    <td>Age:</td>
+                    <td>
+                        <t:textfield t:id="age"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td>
+                        <select t:type="select" t:id="gender"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Height:</td>
+                    <td>
+                        <t:textfield t:id="heightCm"/>
+                        cm
+                    </td>
+                </tr>
+                <tr>
+                    <td>Weight:</td>
+                    <td>
+                        <t:textfield t:id="weightKg"/>
+                        kg
+                    </td>
+                </tr>
+                <tr></tr>
+
+            </table>
+
+            <t:submit value="Click"/>
+
+        </t:form>
+    </div>
+    <div style="float: left">
+        <h3>${res}</h3>
+    </div>
+
+</div>
+
+<div>
+    <!--<t:grid source="cols" pagerPosition="top" class="table table-bordered"/>-->
+
+    <t:grid source="cols" row="cols" class="table table-bordered">
+        <p:empty>
+            <p>
+            </p>
+        </p:empty>
+    </t:grid>
+</div>
+
+</body>
+</html>
